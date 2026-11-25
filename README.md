@@ -188,6 +188,31 @@ Address: 199.188.201.16
 </details>
 
 <details>
+<summary><strong>dnsrecon -d medirozahospital.com</strong></summary>
+
+```
+[*] std: Performing General Enumeration against: medirozahospital.com...
+[-] ERROR No answer for DNSSEC query for medirozahospital.com
+[*]      SOA dns1.namecheaphosting.com 156.154.132.200
+[*]      NS dns1.namecheaphosting.com 156.154.132.200
+[*]      NS dns2.namecheaphosting.com 156.154.133.200
+[*]      MX mx1-hosting.jellyfish.systems 162.255.118.28
+[*]      MX mx2-hosting.jellyfish.systems 162.255.118.29
+[*]      MX mx3-hosting.jellyfish.systems 162.255.118.13
+[*]      A medirozahospital.com 199.188.201.16
+[*]      TXT medirozahospital.com v=spf1 +a +mx +ip4:199.188.201.7 +ip4:199.188.201.38 include:spf.web-hosting.com ~all
+[*]      TXT _dmarc.medirozahospital.com v=DMARC1; p=none;
+[*] Enumerating SRV Records
+[*]      SRV _caldavs._tcp.medirozahospital.com medirozahospital.com 199.188.201.16 2080
+[*]      SRV _carddav._tcp.medirozahospital.com medirozahospital.com 199.188.201.16 2079
+[*]      SRV _autodiscover._tcp.medirozahospital.com cpanelemaildiscovery.cpanel.net 184.94.203.15 443
+[*] 12 Records Found
+[*] Completed enumeration for domain: medirozahospital.com
+```
+*(Full output: [`M1_dnsrecon.txt`](Evidence/M1_Initial_Access/M1_dnsrecon.txt))*
+</details>
+
+<details>
 <summary><strong>wafw00f https://medirozahospital.com</strong></summary>
 
 ```
