@@ -160,34 +160,156 @@ Screenshots are organised in [`Evidence/`](Evidence/) by milestone.
 
 ### M1 — Initial Access (Recon)
 
-![whois](Evidence/M1_Initial_Access/01_whois.png)
-![dnsrecon](Evidence/M1_Initial_Access/02_dnsrecon.png)
-![nslookup](Evidence/M1_Initial_Access/03_nslookup.png)
-![wafw00f](Evidence/M1_Initial_Access/04_wafw00f.png)
-![whatweb](Evidence/M1_Initial_Access/05_whatweb.png)
-![curl headers](Evidence/M1_Initial_Access/06_curl_headers.png)
-![nikto](Evidence/M1_Initial_Access/07_nikto.png)
-![nmap](Evidence/M1_Initial_Access/08_nmap.png)
-![robots.txt](Evidence/M1_Initial_Access/09_robots_txt.png)
-![sitemap.xml](Evidence/M1_Initial_Access/10_sitemap_xml.png)
+Raw command output is included as text in [`Evidence/M1_Initial_Access/`](Evidence/M1_Initial_Access/) rather than screenshots, since the exact output is clearer evidence than a photo of a terminal.
+
+<details>
+<summary><strong>whois medirozahospital.com</strong></summary>
+
+```
+Domain Name: MEDIROZAHOSPITAL.COM
+Registrar: NameCheap, Inc.
+Creation Date: 2026-08-14T20:51:24Z
+Registry Expiry Date: 2027-08-14T20:51:24Z
+Name Server: DNS1.NAMECHEAPHOSTING.COM
+Name Server: DNS2.NAMECHEAPHOSTING.COM
+Domain Status: clientTransferProhibited
+Registrant Organization: Privacy service provided by WITHHELD FOR PRIVACY LLC
+```
+</details>
+
+<details>
+<summary><strong>nslookup medirozahospital.com</strong></summary>
+
+```
+Non-authoritative answer:
+Name:	medirozahospital.com
+Address: 199.188.201.16
+```
+</details>
+
+<details>
+<summary><strong>wafw00f https://medirozahospital.com</strong></summary>
+
+```
+[*] Checking https://medirozahospital.com
+[+] The site https://medirozahospital.com is behind LiteSpeed (LiteSpeed Technologies) WAF.
+[~] Number of requests: 2
+```
+</details>
+
+<details>
+<summary><strong>whatweb https://medirozahospital.com</strong></summary>
+
+```
+Status    : 200 OK
+Title     : Mediroza General Hospital | Compassionate Care, Advanced Medicine
+IP        : 199.188.201.16
+Summary   : Email[info@medirozahospital.com], HTML5, HTTPServer[LiteSpeed],
+            LiteSpeed, Meta-Author[Mediroza IT Department],
+            MetaGenerator[Mediroza CMS 1.4.2], PoweredBy[Mediroza],
+            UncommonHeaders[x-turbo-charged-by]
+```
+</details>
+
+<details>
+<summary><strong>curl -I https://medirozahospital.com</strong></summary>
+
+```
+HTTP/2 200
+content-type: text/html
+last-modified: Fri, 04 Sep 2026 02:03:12 GMT
+accept-ranges: bytes
+content-length: 5445
+server: LiteSpeed
+x-turbo-charged-by: LiteSpeed
+```
+</details>
+
+<details>
+<summary><strong>nikto -h https://medirozahospital.com</strong></summary>
+
+```
++ GET /: Uncommon header(s) 'x-turbo-charged-by' found, with contents: LiteSpeed.
++ GET /staff/: Directory indexing found. See: CWE-548
++ GET /robots.txt: Entry '/staff/' is returned a non-forbidden or redirect HTTP code (200).
++ GET /old/: Directory indexing found. See: CWE-548
++ GET /robots.txt: Entry '/old/' is returned a non-forbidden or redirect HTTP code (200).
++ GET /patient/: Directory indexing found. See: CWE-548
++ GET /robots.txt: Entry '/patient/' is returned a non-forbidden or redirect HTTP code (200).
++ GET /robots.txt: contains 3 entries which should be manually viewed.
++ GET /: Suggested security header missing: x-content-type-options
++ GET /: Suggested security header missing: strict-transport-security
++ GET /: Suggested security header missing: content-security-policy
++ GET /: Suggested security header missing: referrer-policy
++ GET /: Suggested security header missing: permissions-policy
++ GET /sitemap.xml: The sitemap.xml file provides a listing of the site content.
++ GET /cpanel/: Web-based control panel.
++ GET /controlpanel/: Admin login page/section found.
++ GET /wp-admin/: Admin login page/section found.
+```
+</details>
+
+<details>
+<summary><strong>nmap -sV -Pn medirozahospital.com</strong></summary>
+
+```
+Nmap scan report for medirozahospital.com (199.188.201.16)
+Host is up (0.38s latency).
+rDNS record for 199.188.201.16: server274-1.web-hosting.com
+PORT    STATE SERVICE        VERSION
+21/tcp  open  ftp            Pure-FTPd
+25/tcp  open  smtp?
+26/tcp  open  smtp           Exim smtpd 4.100.1
+53/tcp  open  domain         (unknown banner: BIND)
+80/tcp  open  http-proxy     HAProxy http proxy 2.0.0 or later
+110/tcp open  pop3           Dovecot pop3d
+143/tcp open  imap           Dovecot imapd
+443/tcp open  ssl/http-proxy HAProxy http proxy 2.0.0 or later
+465/tcp open  ssl/smtp       Exim smtpd 4.100.1
+587/tcp open  smtp           Exim smtpd 4.100.1
+993/tcp open  ssl/imap       Dovecot imapd
+995/tcp open  ssl/pop3       Dovecot pop3d
+Service Info: Host: server274.web-hosting.com; Device: load balancer
+```
+</details>
+
+<details>
+<summary><strong>robots.txt</strong></summary>
+
+```
+User-agent: *
+Disallow: /patient/
+Disallow: /staff/
+Disallow: /old/
+
+Sitemap: https://medirozahospital.com/sitemap.xml
+```
+</details>
 
 ### M1 — Authentication Bypass
 
-![Staff login page](Evidence/M1_Authentication_Bypass/01_staff_login_page.png)
-![Patient login page](Evidence/M1_Authentication_Bypass/02_patient_login_page.png)
-![SQLi bypass attempt](Evidence/M1_Authentication_Bypass/03_sqli_bypass_attempt.png)
-![MySQL error disclosure](Evidence/M1_Authentication_Bypass/04_mysql_error_disclosure.png)
-![Patient Portal access gained](Evidence/M1_Authentication_Bypass/05_patient_portal_access.png)
+![Staff login - invalid credentials baseline](Evidence/M1_Authentication_Bypass/01_staff_login_invalid_attempt.png)
+![Patient login baseline - username not found](Evidence/M1_Authentication_Bypass/02_patient_login_baseline_username_not_found.png)
+![SQLi bypass attempt - admin' --](Evidence/M1_Authentication_Bypass/03_sqli_bypass_attempt.png)
+![Patient Portal access gained - lab reports listed](Evidence/M1_Authentication_Bypass/04_patient_portal_access_lab_reports.png)
 
 ### M2 — Cracking
+
+All three PDFs confirmed password-protected before cracking:
+
+![patient_report_1.pdf password required](Evidence/M2_Cracking/00a_patient_report_1_password_required.png)
+![patient_report_2.pdf password required](Evidence/M2_Cracking/00b_patient_report_2_password_required.png)
+![patient_report_3.pdf password required](Evidence/M2_Cracking/00c_patient_report_3_password_required.png)
 
 ![Hash Calculator - PDF1](Evidence/M2_Cracking/01_hash_calculator_pdf1.png)
 ![Password Cracker result - PDF1 (123456)](Evidence/M2_Cracking/02_password_cracker_pdf1_result.png)
 ![Hash Calculator - PDF2](Evidence/M2_Cracking/03_hash_calculator_pdf2.png)
 ![Password Cracker result - PDF2 (password)](Evidence/M2_Cracking/04_password_cracker_pdf2_result.png)
-![PDF3 hash extraction](Evidence/M2_Cracking/05_pdf3_hash_extraction.png)
-![PDF3 password confirmed](Evidence/M2_Cracking/06_pdf3_password_confirmed.png)
-![PDF3 decrypted content](Evidence/M2_Cracking/07_pdf3_decrypted_content.png)
+
+Decrypted contents of all 3 reports are included in [`Evidence/M2_Cracking/Decrypted_PDFs/`](Evidence/M2_Cracking/Decrypted_PDFs/):
+- `Pathology_Report_-_S._Dlamini.pdf` (password: `123456`)
+- `Pathology_Report_-_P._Reddy.pdf` (password: `password`)
+- `Pathology_Report_-_E._Thompson.pdf` (password: `!@#$%^&`)
 
 ### M3 — Sensitive Data Exposure
 
