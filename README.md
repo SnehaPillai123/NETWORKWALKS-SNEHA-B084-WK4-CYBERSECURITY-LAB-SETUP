@@ -99,7 +99,7 @@ I worked through this independently, starting with passive and active reconnaiss
 - `patient_report_2.pdf`
 - `Pathology Report - E. Thompson.pdf` (`patient_report_3.pdf`)
 
-All three were password-protected PDFs, which fed directly into M2.
+All three were password-protected PDFs, which fed directly into M2. The original locked files are included at `Evidence/M1_Initial_Access/Retrieved_PDFs/`.
 
 ### 4.2 M2 — Attack (Cracking)
 
@@ -111,7 +111,7 @@ I extracted a crackable hash from each PDF using the **NetworkWalks Hash Calcula
 | `patient_report_2.pdf` | Reddy | ✅ via Hash Calculator | **`password`** |
 | `patient_report_3.pdf` | E. Thompson | ✅ via `pdf2john` (Kali) | **`!@#$%^&`** |
 
-All three PDFs opened successfully with their recovered passwords, confirming the attack and exposing the underlying lab report content for each patient.
+All three PDFs opened successfully with their recovered passwords, confirming the attack and exposing the underlying lab report content for each patient. The unlocked files are included at `Evidence/M2_Cracking/Decrypted_PDFs/` as proof of successful recovery.
 
 ### 4.3 M3 — Data Extraction
 
