@@ -330,6 +330,8 @@ All three PDFs confirmed password-protected before cracking:
 ![Password Cracker result - PDF1 (123456)](Evidence/M2_Cracking/02_password_cracker_pdf1_result.png)
 ![Hash Calculator - PDF2](Evidence/M2_Cracking/03_hash_calculator_pdf2.png)
 ![Password Cracker result - PDF2 (password)](Evidence/M2_Cracking/04_password_cracker_pdf2_result.png)
+![Hash Calculator - PDF3](Evidence/M2_Cracking/05_hash_calculator_pdf3.png)
+![Password Cracker result - PDF3 (!@#$%^&)](Evidence/M2_Cracking/06_password_cracker_pdf3_result.png)
 
 Decrypted contents of all 3 reports are included in [`Evidence/M2_Cracking/Decrypted_PDFs/`](Evidence/M2_Cracking/Decrypted_PDFs/):
 - `Pathology_Report_-_S._Dlamini.pdf` (password: `123456`)
